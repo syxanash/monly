@@ -46,6 +46,10 @@ my $file_content      = $EMPTY;
 my $config_file       = $EMPTY;
 my $remote_web_server = $EMPTY;
 
+my $first_execution = 1;
+
+# parse argv parameters
+
 if ( $actions{help} ) {
     pod2usage(1);
 }
@@ -94,6 +98,15 @@ else {
 new_log();
 
 while (1) {
+    if ( $first_execution ) {
+        # wait a few seconds just to make sure
+        # connection is ready after boot
+
+        sleep( int( rand(15) ) + 5 );
+
+        $first_execution = 0;
+    }
+
     if ( check_connection() ) {
 
         # check remotely if Monly is enabled

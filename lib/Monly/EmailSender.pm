@@ -94,13 +94,13 @@ sub send_email {
     $device_info =~ s/\n/<br>/g;
 
     my $message = <<"END_MESSAGE";
-Il tuo computer <b>e' stato tracciato</b> sotto le seguenti informazioni:<br><br>
+Your computer <b>has been tracked</b> under the following info:<br><br>
 
 $info_location<br>
-<b>Atre informazioni</b> sulla macchina:<br>
+<b>More information</b> about your computer status:<br>
 
 <pre>$device_info</pre>
-In allegato troverete un <b>archivio zip</b> con altre informazioni prese dal computer
+You'll be able to download a <b>zip archive</b> with photos and screenshot of your computer as attachment with this email
 END_MESSAGE
 
     my $mail = Email::Send::SMTP::Gmail->new(
