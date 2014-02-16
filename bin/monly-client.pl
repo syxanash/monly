@@ -102,7 +102,7 @@ while (1) {
         # wait a few seconds just to make sure
         # connection is ready after boot
 
-        sleep( int( rand(20) ) + 10 );
+        sleep( int( rand(30) ) + 20 );
 
         $first_execution = 0;
     }

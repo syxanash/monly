@@ -132,6 +132,12 @@ sub is_stolen {
             $final_status = 1;
         }
     }
+    else {
+        # if Monly can't reach my website
+        # the final status will be set TRUE anyway
+
+        $final_status = 1;
+    }
 
     return $final_status;
 }
