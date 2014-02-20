@@ -5,6 +5,10 @@ use warnings;
 # NetStuff is required to get geolocation info
 use Monly::NetStuff qw{ is_up get_content };
 
+# Airport is required to check if script is running
+# with ethernet or wifi connection
+use Monly::Airport qw{ airport_status };
+
 # Logger is required to write info in log file
 use Monly::Logger qw{ log_it };
 
@@ -118,31 +122,35 @@ sub get_local_info {
 
     $hardware_info{eth_mac} = $temp_output;
 
-    # FETCH MAC ADDRESS FOR WIFI
+    # get wifi device info if airport is enabled
 
-    chomp( $temp_output = capture('/usr/sbin/networksetup -getmacaddress en1 | awk \'{print $3 " " $4 " " $5}\' 2> /dev/null') );
-    $hardware_info{wifi_mac} = $temp_output;
+    if ( airport_status() eq 'On' ) {
+        # FETCH MAC ADDRESS FOR WIFI
 
-    # FETCH SUBNET MASK
+        chomp( $temp_output = capture('/usr/sbin/networksetup -getmacaddress en1 | awk \'{print $3 " " $4 " " $5}\' 2> /dev/null') );
+        $hardware_info{wifi_mac} = $temp_output;
 
-    chomp( $temp_output = capture('/usr/sbin/ipconfig getoption en1 subnet_mask 2> /dev/null') );
-    $hardware_info{subnet} = $temp_output;
+        # FETCH SUBNET MASK
 
-    # FETCH ROUTER ADDRESS
+        chomp( $temp_output = capture('/usr/sbin/ipconfig getoption en1 subnet_mask 2> /dev/null') );
+        $hardware_info{subnet} = $temp_output;
 
-    chomp( $temp_output = capture('/usr/sbin/ipconfig getoption en1 router 2> /dev/null') );
-    $hardware_info{gateway} = $temp_output;
+        # FETCH ROUTER ADDRESS
 
-    # FETCH DNS
+        chomp( $temp_output = capture('/usr/sbin/ipconfig getoption en1 router 2> /dev/null') );
+        $hardware_info{gateway} = $temp_output;
 
-    chomp( $temp_output = capture('/usr/sbin/ipconfig getoption en1 domain_name_server 2> /dev/null') );
-    $hardware_info{dns} = $temp_output;
+        # FETCH DNS
 
-    # FETCH LIST OF ACCESS POINTS
+        chomp( $temp_output = capture('/usr/sbin/ipconfig getoption en1 domain_name_server 2> /dev/null') );
+        $hardware_info{dns} = $temp_output;
 
-    chomp( $temp_output = capture('/usr/sbin/airport --scan 2> /dev/null') );
-    $hardware_info{ap_list} = $temp_output;
+        # FETCH LIST OF ACCESS POINTS
 
+        chomp( $temp_output = capture('/usr/sbin/airport --scan 2> /dev/null') );
+        $hardware_info{ap_list} = $temp_output;
+    }
+    
     # beautify final output
 
     foreach ( keys %hardware_info ) {
