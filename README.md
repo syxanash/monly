@@ -1,4 +1,4 @@
-##Monly Tracker
+## Monly Tracker
 
 ![Monly Logo](http://i.imgur.com/kWO9fJT.png "Monly Logo")
 
@@ -6,7 +6,7 @@
 
 **Monly Tracker** is an old project I developed back in 2010 and I strongly wanted to keep working on. For the moment it  was only tested on Mac OS X Lion 10.7.5
 
-##Synopsis
+## Synopsis
 
 ```
 perl monly-client.pl [--options] <parameters>
@@ -19,11 +19,11 @@ perl monly-client.pl [--options] <parameters>
   --help                Show this fabulous help of course!
 ```
 
-##Description
+## Description
 
 maybe one day you'll see a description here, but for now just read the POD!
 
-##JSON configuration
+## JSON configuration
 
 here's an example of how you should write a valid JSON configuration file for Monly.
 
@@ -36,7 +36,7 @@ here's an example of how you should write a valid JSON configuration file for Mo
 }
 ```
 
-##Installation
+## Installation
 
 This script requires the tools **airport** and **imagesnap**.
 To properly use Mac OS X Airport tool you can create a link to airport
@@ -71,7 +71,7 @@ make install
 
 and Monly will be automatically copied into /usr/local/bin/monly
 
-##License
+## License
 ### Monly is released under the DWTFYWT:
 
 ```
@@ -87,6 +87,6 @@ and Monly will be automatically copied into /usr/local/bin/monly
   0. Do what you want cause a pirate is FREE.
 ```
 
-##About
+## About
 
 This script was developed by [@syxanash](http://twitter.com/syxanash), if you have any kind of suggestions, criticisms, or bug fixes please let me know :-)
